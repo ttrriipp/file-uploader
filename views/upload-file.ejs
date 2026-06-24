@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= title %></title>
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <form action="/upload-file" method="post" enctype="multipart/form-data">
+      <div>
+        <input type="file" name="file" />
+      </div>
+      <br />
+      <button type="submit">submit</button>
+    </form>
+    <br />
+    <a href="/">go back to home</a>
+  </body>
+</html>
