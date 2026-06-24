@@ -37,8 +37,10 @@ app.use((req, res, next) => {
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-const { indexRouter, authRouter } = require("./routes");
+// routes
+const { indexRouter, authRouter, folderRouter } = require("./routes");
 app.use("/", indexRouter, authRouter);
+app.use("/folders", folderRouter);
 
 app.listen(PORT, (error) => {
   if (error) {
