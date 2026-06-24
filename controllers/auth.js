@@ -25,7 +25,7 @@ const registerPost = [
   async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      return res.status(400).render("register", {
+      return res.status(400).render("auth/register", {
         title: "Register Account",
         errors: errors.array(),
       });
@@ -68,7 +68,7 @@ const loginPost = [
   async (req, res, next) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      return res.status(400).render("login", {
+      return res.status(400).render("auth/login", {
         title: "Login",
         errors: errors.array(),
       });
