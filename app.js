@@ -37,8 +37,8 @@ app.use((req, res, next) => {
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-const indexRouter = require("./routes/index");
-app.use("/", indexRouter);
+const { indexRouter, authRouter } = require("./routes");
+app.use("/", indexRouter, authRouter);
 
 app.listen(PORT, (error) => {
   if (error) {

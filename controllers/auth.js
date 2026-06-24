@@ -4,7 +4,7 @@ const bcrypt = require("bcryptjs");
 const passport = require("passport");
 
 const registerGet = async (req, res) => {
-  res.render("register", { title: "Register Account" });
+  res.render("auth/register", { title: "Register Account" });
 };
 
 const registerPost = [
@@ -59,7 +59,7 @@ const logoutPost = async (req, res, next) => {
 };
 
 const loginGet = async (req, res) => {
-  res.render("login", { title: "Login" });
+  res.render("auth/login", { title: "Login" });
 };
 
 const loginPost = [
