@@ -19,3 +19,16 @@ model Session {
   data      String   @db.Text
   expiresAt DateTime
 }
+
+model Folder {
+  id    Int    @id @default(autoincrement())
+  name  String @unique
+  files File[]
+}
+
+model File {
+  id       Int    @id @default(autoincrement())
+  url      String
+  folder   Folder @relation(fields: [folderId], references: [id])
+  folderId Int
+}
