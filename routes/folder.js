@@ -4,5 +4,7 @@ const controller = require("../controllers/folder");
 
 router.get("/create", controller.createGet);
 router.post("/create", controller.createPost);
+router.get("/:id/edit", controller.editGet);
+router.post("/:id/edit", controller.editPost);
 
 module.exports = router;

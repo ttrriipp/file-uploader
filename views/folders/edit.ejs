@@ -8,12 +8,18 @@
   <body>
     <h1><%= title %></h1>
     <%- include('../partials/errors') %>
-    <form action="/folders/create" method="post">
+    <form action="/folders/<%- folder.id %>/edit" method="post">
       <div>
         <label for="name">Folder name:</label>
-        <input type="text" id="name" name="name" required />
+        <input
+          type="text"
+          id="name"
+          name="name"
+          value="<%- folder.name %>"
+          required
+        />
       </div>
-      <button type="submit">Create Folder</button>
+      <button type="submit">Update</button>
     </form>
     <a href="/">go back to home</a>
   </body>

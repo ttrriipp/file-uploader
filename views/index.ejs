@@ -18,7 +18,7 @@
                 <% folders.forEach(folder=> { %>
                     <li>
                         <span> <%= folder.name %> </span>
-                        <a href="">edit</a>
+                        <a href="/folders/<%- folder.id %>/edit">edit</a>
                         <form action="" method="post">
                             <button type="submit">delete</button>
                         </form>
