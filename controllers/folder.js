@@ -73,9 +73,17 @@ const editPost = [
   },
 ];
 
+const deleteFolder = async (req, res) => {
+  await prisma.folder.delete({
+    where: { id: parseInt(req.params.id) },
+  });
+  res.redirect("/");
+};
+
 module.exports = {
   createGet,
   createPost,
   editGet,
   editPost,
+  deleteFolder,
 };
