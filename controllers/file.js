@@ -28,7 +28,7 @@ function upload(folderName) {
   });
 }
 
-const show = async (req, res, next) => {
+const showFile = async (req, res, next) => {
   try {
     const file = await prisma.file.findUnique({
       where: { id: parseInt(req.params.fileId) },
@@ -81,8 +81,39 @@ const uploadPost = [
   },
 ];
 
+const downloadFile = async (req, res, next) => {
+  try {
+    const file = await prisma.file.findUnique({
+      where: { id: parseInt(req.params.fileId) },
+    });
+    if (!file) {
+      throw new Error("file doesnt exist!");
+    }
+    const response = await fetch(file.url);
+
+    if (!response.ok) {
+      return res.status(response.status).send("Failed to fetch remote file");
+    }
+
+    // Force browser to download the file instead of displaying it inline
+    res.setHeader("Content-Disposition", `attachment; filename="${file.name}"`);
+    res.setHeader(
+      "Content-Type",
+      response.headers.get("Content-Type") || "application/octet-stream",
+    );
+
+    // Convert the Web Stream into a Node ReadableStream and pipe it to res
+    const Readable = require("stream").Readable;
+    const nodeStream = Readable.fromWeb(response.body);
+    nodeStream.pipe(res);
+  } catch (error) {
+    next(error);
+  }
+};
+
 module.exports = {
-  show,
+  showFile,
   uploadGet,
   uploadPost,
+  downloadFile,
 };
