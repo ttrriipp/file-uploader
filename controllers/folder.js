@@ -23,7 +23,7 @@ const createGet = (req, res) => {
 
 const createPost = [
   validateFolder,
-  async (req, res) => {
+  async (req, res, next) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).render("folders/create", {
@@ -44,18 +44,22 @@ const createPost = [
 ];
 
 const editGet = async (req, res, next) => {
-  const folder = await prisma.folder.findUnique({
-    where: { id: parseInt(req.params.id) },
-  });
-  if (!folder) {
-    throw new Error("folder doesn't exist");
+  try {
+    const folder = await prisma.folder.findUnique({
+      where: { id: parseInt(req.params.id) },
+    });
+    if (!folder) {
+      throw new Error("folder doesn't exist");
+    }
+    res.render("folders/edit", { title: "Edit Folder", folder: folder });
+  } catch (error) {
+    next(error);
   }
-  res.render("folders/edit", { title: "Edit Folder", folder: folder });
 };
 
 const editPost = [
   validateFolder,
-  async (req, res) => {
+  async (req, res, next) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).render("folders/edit", {
@@ -76,15 +80,32 @@ const editPost = [
   },
 ];
 
-const deleteFolder = async (req, res) => {
-  await prisma.folder.delete({
-    where: { id: parseInt(req.params.id) },
-  });
-  res.redirect("/");
+const deleteFolder = async (req, res, next) => {
+  try {
+    await prisma.folder.delete({
+      where: { id: parseInt(req.params.id) },
+    });
+    res.redirect("/");
+  } catch (error) {
+    next(error);
+  }
 };
 
-const show = async (req, res) => {
-  const folder = await prisma.folder.findUnique();
+const show = async (req, res, next) => {
+  try {
+    const folder = await prisma.folder.findUnique({
+      where: { id: parseInt(req.params.id) },
+    });
+    if (!folder) {
+      throw new Error("folder doesn't exist!");
+    }
+    res.render("folders/show", {
+      title: `folder ${folder.name}`,
+      folder: folder,
+    });
+  } catch (error) {
+    next(error);
+  }
 };
 
 module.exports = {

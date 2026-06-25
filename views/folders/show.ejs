@@ -10,15 +10,6 @@
     <form action="/upload-file" method="get">
       <button type="submit">upload file</button>
     </form>
-
-    <%= if (locals.files) { %>
-        <ul>
-            <% files.forEach(file=> { %>
-            <li>
-                <%= file.name %>
-            </li>
-            <% }); %>
-        </ul>
-    <% } %>
+    <a href="/">go back to home</a>
   </body>
 </html>
