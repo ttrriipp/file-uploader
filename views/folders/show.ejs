@@ -10,6 +10,13 @@
     <form action="<%= folder.id %>/files/upload" method="get">
       <button type="submit">upload file</button>
     </form>
+    <% if (locals.files) { %>
+      <ul>
+        <% files.forEach(file => { %>
+          <li><a href="<%= folder.id %>/files/<%- file.id %>"><%= file.name %></a></li>
+        <% }); %>
+      </ul>
+    <% } %>
     <a href="/">go back to home</a>
   </body>
 </html>

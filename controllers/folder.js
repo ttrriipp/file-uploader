@@ -99,9 +99,13 @@ const show = async (req, res, next) => {
     if (!folder) {
       throw new Error("folder doesn't exist!");
     }
+    const files = await prisma.file.findMany({
+      where: { folderId: parseInt(req.params.folderId) },
+    });
     res.render("folders/show", {
       title: `folder ${folder.name}`,
       folder: folder,
+      files: files,
     });
   } catch (error) {
     next(error);
