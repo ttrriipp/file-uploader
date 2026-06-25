@@ -7,6 +7,17 @@
   </head>
   <body>
     <h1><%= title %></h1>
+    <div>
+      <h2>details:</h2>
+      <form action="files/<%- file.id %>/download" method="get">
+        <button type="submit">download file</button>
+      </form>
+    </div>
+    <ul>
+      <li>Name: <%= file.name %></li>
+      <li>Size: <%= file.size %></li>
+      <li>Upload Time : <%= file.createdAt %></li>
+    </ul>
     <a href="/">go back to home</a>
   </body>
 </html>
