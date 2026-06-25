@@ -38,10 +38,17 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // routes
-const { indexRouter, authRouter, folderRouter } = require("./routes");
+const {
+  indexRouter,
+  authRouter,
+  folderRouter,
+  fileRouter,
+} = require("./routes");
 app.use("/", indexRouter, authRouter);
 app.use("/folders", folderRouter);
+app.use("/folders/:folderId/files", fileRouter);
 
+// error handler
 app.use((err, req, res, next) => {
   console.error(err.stack);
   let statusCode = err.status || 500;

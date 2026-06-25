@@ -46,7 +46,7 @@ const createPost = [
 const editGet = async (req, res, next) => {
   try {
     const folder = await prisma.folder.findUnique({
-      where: { id: parseInt(req.params.id) },
+      where: { id: parseInt(req.params.folderId) },
     });
     if (!folder) {
       throw new Error("folder doesn't exist");
@@ -70,7 +70,7 @@ const editPost = [
     try {
       const folder = matchedData(req);
       await prisma.folder.update({
-        where: { id: parseInt(req.params.id) },
+        where: { id: parseInt(req.params.folderId) },
         data: folder,
       });
       res.redirect("/");
@@ -83,7 +83,7 @@ const editPost = [
 const deleteFolder = async (req, res, next) => {
   try {
     await prisma.folder.delete({
-      where: { id: parseInt(req.params.id) },
+      where: { id: parseInt(req.params.folderId) },
     });
     res.redirect("/");
   } catch (error) {
@@ -94,7 +94,7 @@ const deleteFolder = async (req, res, next) => {
 const show = async (req, res, next) => {
   try {
     const folder = await prisma.folder.findUnique({
-      where: { id: parseInt(req.params.id) },
+      where: { id: parseInt(req.params.folderId) },
     });
     if (!folder) {
       throw new Error("folder doesn't exist!");
