@@ -7,5 +7,6 @@ router.post("/create", controller.createPost);
 router.get("/:id/edit", controller.editGet);
 router.post("/:id/edit", controller.editPost);
 router.post("/:id/delete", controller.deleteFolder);
+router.get("/:id", controller.show);
 
 module.exports = router;

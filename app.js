@@ -42,6 +42,14 @@ const { indexRouter, authRouter, folderRouter } = require("./routes");
 app.use("/", indexRouter, authRouter);
 app.use("/folders", folderRouter);
 
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  let statusCode = err.status || 500;
+  let message = err.message || "Internal Server Error";
+
+  res.status(statusCode).send(message);
+});
+
 app.listen(PORT, (error) => {
   if (error) {
     throw new Error(error);

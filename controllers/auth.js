@@ -22,7 +22,7 @@ const registerPost = [
       return true;
     }),
   body("password").trim().notEmpty().withMessage("password is required"),
-  async (req, res) => {
+  async (req, res, next) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).render("auth/register", {
@@ -44,7 +44,7 @@ const registerPost = [
         return res.redirect("/");
       });
     } catch (error) {
-      throw new Error(error);
+      next(error);
     }
   },
 ];
