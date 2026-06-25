@@ -10,10 +10,6 @@ router.get("/", async (req, res) => {
   res.render("index", { title: "index", folders: folders });
 });
 
-router.get("/upload-file", (req, res) =>
-  res.render("upload-file", { title: "Upload File" }),
-);
-
 module.exports = {
   indexRouter: router,
   authRouter,

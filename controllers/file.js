@@ -12,6 +12,11 @@ const show = async (req, res, next) => {
   }
 };
 
+const uploadGet = (req, res) => {
+  res.render("files/upload", { title: "Upload File" });
+};
+
 module.exports = {
   show,
+  uploadGet,
 };

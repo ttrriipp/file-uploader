@@ -7,7 +7,7 @@
   </head>
   <body>
     <h1><%= title %></h1>
-    <form action="/upload-file" method="get">
+    <form action="<%= folder.id %>/files/upload" method="get">
       <button type="submit">upload file</button>
     </form>
     <a href="/">go back to home</a>
